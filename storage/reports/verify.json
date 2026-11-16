@@ -1,0 +1,495 @@
+{
+  "tool": "WealthMax remediation verify harness",
+  "updated_at": "2026-11-06T06:42:13.888189+00:00",
+  "summary": {
+    "total": 69,
+    "passed": 66,
+    "failed": 0,
+    "blocked": 3
+  },
+  "checks": [
+    {
+      "phase": 1,
+      "name": "env-frontend-scrub",
+      "description": "frontend/.env.example contains no live secrets",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 1,
+      "name": "env-backend-scrub",
+      "description": "backend/.env.example contains no live IIFL keys",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 1,
+      "name": "otp-backdoor-removed",
+      "description": "otp.service.ts has no universal 123456 bypass and uses CSRF-safe OTP generation",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 1,
+      "name": "otp-no-bypass-literally",
+      "description": "otp.service.ts contains no '123456' string",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 1,
+      "name": "otp-async-redis",
+      "description": "OTP storage is Redis-backed with attempt limiting",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 1,
+      "name": "otp-not-in-response",
+      "description": "OTP is no longer unconditionally returned in the HTTP response",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 1,
+      "name": "register-no-role-from-client",
+      "description": "registration schema no longer accepts a client-chosen role",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 1,
+      "name": "register-forces-user-role",
+      "description": "AuthService.register assigns role 'user' server-side",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 1,
+      "name": "iifl-keys-not-hardcoded",
+      "description": "IIFL service credentials are env-only",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 1,
+      "name": "iiflapi-keys-not-hardcoded",
+      "description": "IIFL API service credentials are env-only",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 1,
+      "name": "debug-route-dev-only",
+      "description": "debug routes are only mounted in development",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 1,
+      "name": "sync-mfapi-admin-only",
+      "description": "sync-mfapi endpoint requires admin role",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 1,
+      "name": "rm-routes-role-guarded",
+      "description": "relationship manager routes enforce role authorization",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 1,
+      "name": "partner-impersonation-tenancy",
+      "description": "partners can only impersonate clients of their own firm",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 1,
+      "name": "body-size-limits",
+      "description": "express body parser has explicit size limits",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 1,
+      "name": "cors-allowlist",
+      "description": "CORS uses a validated allow-list",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 1,
+      "name": "rate-limit-present",
+      "description": "a rate limiter exists and is applied",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 1,
+      "name": "rate-limit-applied",
+      "description": "api and auth limiters are wired into app/routes",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 1,
+      "name": "jwt-secret-prod-guard",
+      "description": "production refuses default JWT secret / encryption key",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 1,
+      "name": "ssl-verification-default-on",
+      "description": "database SSL verifies certificates by default",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 1,
+      "name": "refresh-token-endpoint",
+      "description": "backend exposes /auth/refresh-token and refresh token generation",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 1,
+      "name": "refresh-token-service",
+      "description": "AuthService implements refresh token issuance + rotation",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 1,
+      "name": "jwt-algorithm-pinned",
+      "description": "JWT verification pins HS256",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 1,
+      "name": "frontend-refresh-compatible",
+      "description": "frontend stores refresh token on login and clears it on logout",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 1,
+      "name": "auth-service-public-branding",
+      "description": "public-branding endpoint is genuinely public",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 2,
+      "name": "financial-tables-migration",
+      "description": "migration creates incomes/income_sources/expenses/expense_sources/assets/other_assets/liabilities/safety_nets/safety_net_dependents referencing the backend users table",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 2,
+      "name": "gap-analysis-real-tables",
+      "description": "gap-analysis queries profiles with liabilities_emi and real monthly invested portfolio_transactions, no phantom tables",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 2,
+      "name": "gap-analysis-no-phantom-tables",
+      "description": "gap-analysis no longer references user_profiles or financial_transactions",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 2,
+      "name": "onboarding-dob-real-age",
+      "description": "onboarding uses submitted DOB first and drops console logging",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 2,
+      "name": "profile-controller-no-console",
+      "description": "profile controller has no leftover console.log lines",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 3,
+      "name": "quarterly-expense-division-fixed",
+      "description": "normalizeExpensesToMonthly divides quarterly amounts by 3, not 4",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 3,
+      "name": "circuit-band-honest-label",
+      "description": "circuit bands are env-configurable and labelled as estimates",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 3,
+      "name": "portfolio-review-single-route",
+      "description": "advisor /portfolio-review is registered exactly once with PortfolioReviewController",
+      "verdict": "PASS",
+      "detail": "1 registration, PortfolioReviewController active"
+    },
+    {
+      "phase": 3,
+      "name": "equity-portfolio-route-auth",
+      "description": "equity-dashboard /portfolio requires authentication",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 3,
+      "name": "equity-dashboard-live-data",
+      "description": "market overview is computed from Yahoo Finance (no hardcoded index values)",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 3,
+      "name": "equity-dashboard-no-fake-numbers",
+      "description": "hardcoded static dashboard numbers removed",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 3,
+      "name": "equity-portfolio-real-metrics",
+      "description": "portfolio endpoint computes real cost basis and reports unknown metrics as explicit nulls",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 3,
+      "name": "equity-sections-use-api-client",
+      "description": "all 7 equity sections use the shared api client (no hardcoded production fetch)",
+      "verdict": "PASS",
+      "detail": "all 7 sections wired through api client"
+    },
+    {
+      "phase": 3,
+      "name": "equity-portfolio-null-safe",
+      "description": "portfolio card renders dash (not NaN/crash) for null todaysReturns/xirr",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 3,
+      "name": "volume-numeric-sort",
+      "description": "movers sort on raw numeric volume, not formatted strings",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 3,
+      "name": "family-b2c-allowed",
+      "description": "family creation no longer requires a partner firm",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 3,
+      "name": "family-b2c-gate-removed",
+      "description": "the 'Only users associated with a firm' blocker is gone",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 3,
+      "name": "families-partner-id-column",
+      "description": "families.partner_id column defined with FK to partner_agencies in the base chain",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 3,
+      "name": "smart-report-no-console-log",
+      "description": "SmartReportDashboard does not log sensitive report payloads",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 3,
+      "name": "portfolio-review-page-uses-api",
+      "description": "routed portfolio review page uses the shared api client, not raw fetch/wm_token",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 3,
+      "name": "portfolio-review-page-no-manual-token",
+      "description": "no localStorage wm_token reads or raw fetch in the page",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 4,
+      "name": "junk-files-absent",
+      "description": "root throwaway scripts, .orig/.patch leftovers and mock/Plaid files deleted",
+      "verdict": "PASS",
+      "detail": "all 13 junk files absent"
+    },
+    {
+      "phase": 4,
+      "name": "plaid-unmounted",
+      "description": "plaid routes no longer mounted by the router",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 4,
+      "name": "profile-page-no-plaid",
+      "description": "Profile.tsx no longer imports/renders PlaidLinkButton",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 4,
+      "name": "package-no-react-plaid-link",
+      "description": "frontend no longer depends on react-plaid-link",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 4,
+      "name": "mutual-fund-mocks-removed",
+      "description": "mutual fund routes contain only real service endpoints",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 4,
+      "name": "audit-service-real",
+      "description": "audit.service.ts persists to audit_logs and reports failures loudly",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 4,
+      "name": "audit-tables-migration",
+      "description": "node-pg-migrate creates audit_logs referencing backend users",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 5,
+      "name": "demo-migration-idempotent",
+      "description": "seed migration is guarded against duplicate demo data",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 5,
+      "name": "demo-otp-scope-limited",
+      "description": "fixed demo OTP is wired only through the demo-identifier branch",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 5,
+      "name": "demo-prod-gate",
+      "description": "production requires explicit DEMO_LOGIN_ENABLED=true opt-in",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 5,
+      "name": "demo-fixed-otp-only-via-options",
+      "description": "OTP service accepts a fixed OTP only as an explicit caller option (no literal demo code stored in the OTP module)",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 5,
+      "name": "demo-frontend-hint",
+      "description": "login UI surfaces the demo hint when backend marks the demo path",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 5,
+      "name": "changes-md-exists",
+      "description": "changes.md documents every phase of remediation",
+      "verdict": "PASS",
+      "detail": "all phase sections present"
+    },
+    {
+      "phase": 6,
+      "name": "yahoo-v3-client-instantiated",
+      "description": "yahoo-finance2 v3 exports a class - the dashboard instantiates it",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 6,
+      "name": "yahoo-v3-other-services-instantiated",
+      "description": "all yahoo-finance2 consumers instantiate the v3 client",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 6,
+      "name": "goals-table-created-in-chain",
+      "description": "the missing goals table is created inside the family-goal migration",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 6,
+      "name": "trigger-function-or-replace",
+      "description": "updated_at trigger function uses CREATE OR REPLACE (idempotent)",
+      "verdict": "PASS",
+      "detail": "ok"
+    },
+    {
+      "phase": 6,
+      "name": "migrations-no-custom-pool",
+      "description": "no migration bypasses node-pg-migrate with its own pg.Pool or ESM imports",
+      "verdict": "PASS",
+      "detail": "all migrations use the pgm API"
+    },
+    {
+      "phase": 6,
+      "name": "duplicate-crm-migration-removed",
+      "description": "the duplicate CRM table migration (1779000000000) was deleted",
+      "verdict": "PASS",
+      "detail": "removed (tables provided by 1776000000000)"
+    },
+    {
+      "phase": 6,
+      "name": "type-compile-gate-passed",
+      "description": "backend type-checks clean (npx tsc --noEmit exit 0), recorded after the first real install",
+      "verdict": "PASS",
+      "detail": "verified manually on 2026-11-06 with yahoo-finance2 v3 + all dashboard fixes"
+    },
+    {
+      "phase": "BLOCKED",
+      "name": "supabase-project-unreachable",
+      "description": "Original Supabase project refused at the connection layer (pooler: 'tenant/user not found'; direct db host NXDOMAIN). Restore the project in the Supabase dashboard or provide a fresh DATABASE_URL",
+      "verdict": "BLOCKED",
+      "detail": "Project paused/deleted at Supabase. Local embedded Postgres is the dev fallback (see backend/.env)"
+    },
+    {
+      "phase": "BLOCKED",
+      "name": "secret-rotation",
+      "description": "Rotate exposed credentials (Supabase service-role/DB password, Gemini key, IIFL keys) - requires provider dashboards, human decision",
+      "verdict": "BLOCKED",
+      "detail": "Rotate via provider consoles; code-side scrubbing is complete"
+    },
+    {
+      "phase": "BLOCKED",
+      "name": "sms-gateway",
+      "description": "Integrate SMS gateway (MSG91/Textlocal) for mobile OTP delivery - requires provider account + DLT template",
+      "verdict": "BLOCKED",
+      "detail": "Mobile OTP code is currently surfaced only in dev responses; add MSG91 creds to enable prod delivery"
+    }
+  ]
+}

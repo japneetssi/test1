@@ -1,0 +1,19 @@
+project_id = "vwkfljvijngvogkgswmv"
+
+[functions.risk-profiler]
+verify_jwt = false
+
+[functions.financial-persona]
+verify_jwt = false
+
+[functions.margin-pledge]
+verify_jwt = false
+
+[functions.risk-monitor]
+verify_jwt = false
+
+[functions.health-score]
+verify_jwt = false
+
+[functions.advisory-report]
+verify_jwt = false

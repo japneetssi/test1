@@ -1,0 +1,16 @@
+name = "wealthmax-frontend"
+main = "./dist/index.html"
+compatibility_date = "2024-01-01"
+
+[build]
+  command = "npm run build"
+  releaseDirectory = "dist"
+
+[env.production]
+  name = "wealthmax-frontend"
+  route = ""
+  # Uncomment and set your domain if you have a custom domain
+  # domain = "yourdomain.com"
+
+[env preview]
+  # Preview environment settings

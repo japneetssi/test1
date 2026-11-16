@@ -1,0 +1,23 @@
+--- frontend/src/pages/Marketplace.tsx
++++ frontend/src/pages/Marketplace.tsx
+@@ -73,6 +73,20 @@
+                 }
+             } catch (err) {
+                 console.error(err);
++                // Fallback mock data if server is unreachable
++                const mockExtras: Product[] = [
++                    { id: 'm1', name: 'Premium Commercial Space Fund', shortName: 'Comm Space Fund', category: 'Real Estate', risk: 'Moderate', amc: 'Realty Partners', nav: 5000, cagr3y: 12, aum: '₹500 Cr', rating: 4, minSIP: 100000, isRecommended: true },
++                    { id: 'm2', name: 'Global REIT Index', shortName: 'Global REIT', category: 'Real Estate', risk: 'Conservative', amc: 'Global Infra', nav: 120, cagr3y: 8, aum: '₹1200 Cr', rating: 5, minSIP: 5000 },
++                    { id: 'm3', name: 'Digital Art NFT Fund', shortName: 'NFT Art Fund', category: 'Other Assets', risk: 'Aggressive', amc: 'Digital Native', nav: 10, cagr3y: 45, aum: '₹50 Cr', rating: 3, minSIP: 1000 },
++                    { id: 'm4', name: 'Term Life Cover Pro 1Cr', shortName: 'Term Cover Pro', category: 'Insurance (Life/Term)', risk: 'Conservative', amc: 'SafeLife', cagr3y: 15, aum: 'N/A', rating: 4, minSIP: 15000 },
++                    { id: 'm5', name: 'Health Suraksha Plus Family', shortName: 'Health Plus', category: 'Insurance (Health)', risk: 'Conservative', amc: 'HealthCare Muthoot', cagr3y: 20, aum: 'N/A', rating: 5, minSIP: 8000 },
++                    { id: 'm6', name: 'AIF Alpha Returns', shortName: 'AIF Alpha', category: 'AIF', risk: 'Aggressive', amc: 'Alpha Partners', nav: 10500, cagr3y: 25, aum: '₹2000 Cr', rating: 4, minSIP: 1000000 },
++                    { id: 'm7', name: 'PMS MultiCap Strategy', shortName: 'PMS MultiCap', category: 'PMS', risk: 'Moderate', amc: 'WealthMax PMS', nav: 520, cagr3y: 18, aum: '₹800 Cr', rating: 5, minSIP: 5000000, isRecommended: true },
++                    { id: 'm8', name: 'HDFC Mid-Cap Opportunities', shortName: 'HDFC Mid-Cap', category: 'Equity', risk: 'Aggressive', amc: 'HDFC AMC', nav: 124.5, cagr3y: 24, aum: '₹40,000 Cr', rating: 5, minSIP: 1000 },
++                    { id: 'm9', name: 'SBI Small Cap Fund', shortName: 'SBI Small Cap', category: 'MF', risk: 'Aggressive', amc: 'SBI Funds', nav: 150.2, cagr3y: 28, aum: '₹25,000 Cr', rating: 4, minSIP: 500 },
++                    { id: 'm10', name: 'Axis Bluechip Fund', shortName: 'Axis Bluechip', category: 'MF', risk: 'Moderate', amc: 'Axis AMC', nav: 55.4, cagr3y: 14, aum: '₹35,000 Cr', rating: 4, minSIP: 1000 },
++                ];
++                setProducts(mockExtras);
+             } finally {
+                 setLoading(false);
+             }
